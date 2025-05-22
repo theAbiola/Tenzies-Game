@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .big-container {
   width: 100%;
   height: 50vh;
@@ -34,4 +41,14 @@
   height: 252.8px; */
   align-items: center;
   justify-content: center;
+}
+
+.big-button {
+  margin-top: 50px;
+  border: none;
+  background-color: #3c5c70;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
 }

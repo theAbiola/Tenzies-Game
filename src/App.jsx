@@ -20,6 +20,11 @@ function App() {
 
   const [dice, setDice] = useState(getDieNumbers())
   const dieNumbers = dice.map((die, index) => <Die key={index} value={die} />)
+
+  function handleDice() {
+    setDice(getDieNumbers())
+  }
+
   return (
 
     <>
@@ -31,6 +36,9 @@ function App() {
             </div>
           </div>
         </div>
+
+        <button className='big-button' onClick={handleDice}>Generate new</button>
+
       </main>
     </>
   )

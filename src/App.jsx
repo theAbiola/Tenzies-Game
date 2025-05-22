@@ -18,7 +18,8 @@ function App() {
       */
   }
 
-  const dieArray = getDieNumbers()
+  const [dice, setDice] = useState(getDieNumbers())
+  const dieNumbers = dice.map((die, index) => <Die key={index} value={die} />)
   return (
 
     <>
@@ -26,7 +27,7 @@ function App() {
         <div className='big-container'>
           <div className='small-container'>
             <div className='dice-container'>
-              {dieArray.map((dieNum, index) => <Die key={index} value={dieNum} />)}
+              {dieNumbers}
             </div>
           </div>
         </div>

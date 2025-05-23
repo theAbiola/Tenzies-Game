@@ -4,11 +4,22 @@ import './App.css'
 import { nanoid } from "nanoid"
 
 function App() {
+  const [dice, setDice] = useState(getDieNumbers())
+
+  function hold(id) {
+    console.log(id)
+
+    setDice(prevDice => prevDice.map(eachDie => ({
+      ...eachDie,
+      isHeld: id === eachDie.id ? !eachDie.isHeld : eachDie.isHeld
+    })))
+  }
+
   function getDieNumbers() {
     let numArray = []
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.ceil(Math.random() * 6)
-      numArray.push({ value: randomNumber, isHeld: true, id: nanoid() })
+      numArray.push({ value: randomNumber, isHeld: false, id: nanoid() })
     }
     return numArray
     // Another way to write the content of this function
@@ -19,8 +30,11 @@ function App() {
       */
   }
 
-  const [dice, setDice] = useState(getDieNumbers())
-  const dieNumbers = dice.map((die, index) => <Die key={nanoid()} value={die.value} isHeld={die.isHeld} />)
+
+
+  const dieInstances = dice.map((die, index) => (
+    <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={hold} />
+  ))
 
   function handleDice() {
     setDice(getDieNumbers())
@@ -33,7 +47,7 @@ function App() {
         <div className='big-container'>
           <div className='small-container'>
             <div className='dice-container'>
-              {dieNumbers}
+              {dieInstances}
             </div>
             <button className='big-button' onClick={handleDice}>Roll Dice</button>
           </div>

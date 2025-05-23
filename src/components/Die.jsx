@@ -1,8 +1,13 @@
 import './Die.css'
 
 function Die(props) {
+    const styles = {
+        backgroundColor: props.isHeld ? "#59E391" : "white"
+    }
     return (
-        <button style={{ backgroundColor: props.isHeld ? '#59E391' : 'white' }} className='die-buttons'>{props.value}</button>
+        <button onClick={() => props.holdFunction(props.id)} style={styles} className='die-buttons'>
+            {props.value}
+        </button>
     )
 }
 

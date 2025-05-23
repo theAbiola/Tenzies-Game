@@ -2,7 +2,7 @@ import './Die.css'
 
 function Die(props) {
     return (
-        <button className='die-buttons'>{props.value}</button>
+        <button style={{ backgroundColor: props.isHeld ? '#59E391' : 'white' }} className='die-buttons'>{props.value}</button>
     )
 }
 

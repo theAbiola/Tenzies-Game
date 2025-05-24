@@ -41,6 +41,12 @@ function App() {
     })))
   }
 
+  if (
+    dice.every(die => die.isHeld) &&
+    dice.every(die => die.value === dice[0].value)) {
+    console.log('Game Won!')
+  }
+
   const dieInstances = dice.map((die, index) => (
     <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={hold} />
   ))

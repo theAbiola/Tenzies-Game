@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Die from './components/Die'
 import './App.css'
 import { nanoid } from "nanoid"
+import Confetti from 'react-confetti'
 
 function App() {
   const [dice, setDice] = useState(getDieNumbers())
@@ -41,11 +42,9 @@ function App() {
     })))
   }
 
-  if (
+  let gameWon =
     dice.every(die => die.isHeld) &&
-    dice.every(die => die.value === dice[0].value)) {
-    console.log('Game Won!')
-  }
+    dice.every(die => die.value === dice[0].value)
 
   const dieInstances = dice.map((die, index) => (
     <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={hold} />
@@ -64,7 +63,8 @@ function App() {
             <div className='dice-container'>
               {dieInstances}
             </div>
-            <button className='big-button' onClick={handleDice}>Roll Dice</button>
+            <button className='big-button' onClick={handleDice}>{gameWon ? 'New Game' : 'Roll Dice'}</button>
+            {gameWon && <Confetti />}
           </div>
         </div>
       </main>

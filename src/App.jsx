@@ -5,7 +5,9 @@ import { nanoid } from "nanoid"
 import Confetti from 'react-confetti'
 
 function App() {
-  const [dice, setDice] = useState(getDieNumbers())
+  //Notice how we now have an arrow function that returns the call to the getDieNumbers() function.
+  //This is to help us prevent React from calling the getNumbers() function on every re-render of our App component
+  const [dice, setDice] = useState(() => getDieNumbers())
 
   function getDieNumbers() {
     let numArray = []

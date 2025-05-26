@@ -10,16 +10,16 @@ function App() {
   const [dice, setDice] = useState(() => getDieNumbers())
 
   function getDieNumbers() {
-    let numArray = []
+    let diceArray = []
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.ceil(Math.random() * 6)
-      numArray.push({
+      diceArray.push({
         value: randomNumber,
         isHeld: false,
         id: nanoid()
       })
     }
-    return numArray
+    return diceArray
     // Another way to write the content of this function
     /* 
       return new Array(10)
@@ -28,10 +28,10 @@ function App() {
       */
   }
 
-  function handleDice() {
-    setDice(prevDiceValues => prevDiceValues.map(actualDie => ({
-      ...actualDie,
-      value: actualDie.isHeld === false ? Math.ceil(Math.random() * 6) : actualDie.value
+  function rollDice() {
+    setDice(prevDiceValues => prevDiceValues.map(die => ({
+      ...die,
+      value: die.isHeld === false ? Math.ceil(Math.random() * 6) : die.value,
     })))
   }
 
@@ -52,6 +52,14 @@ function App() {
     <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={hold} />
   ))
 
+  function newGame() {
+    setDice(prevDice => prevDice.map(die => ({
+      ...die,
+      value: gameWon && Math.ceil(Math.random() * 6),
+      isHeld: gameWon && false,
+    })))
+  }
+
 
 
   return (
@@ -65,7 +73,7 @@ function App() {
             <div className='dice-container'>
               {dieInstances}
             </div>
-            <button className='big-button' onClick={handleDice}>{gameWon ? 'New Game' : 'Roll Dice'}</button>
+            <button className='big-button' onClick={gameWon ? newGame : rollDice}>{gameWon ? 'New Game' : 'Roll Dice'}</button>
             {gameWon && <Confetti />}
           </div>
         </div>

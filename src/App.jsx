@@ -35,12 +35,12 @@ function App() {
     })))
   }
 
-  function hold(id) {
+  function holdDice(id) {
     console.log(id)
 
-    setDice(prevDice => prevDice.map(eachDie => ({
-      ...eachDie,
-      isHeld: id === eachDie.id ? !eachDie.isHeld : eachDie.isHeld
+    setDice(prevDice => prevDice.map(die => ({
+      ...die,
+      isHeld: id === die.id ? !die.isHeld : die.isHeld
     })))
   }
 
@@ -49,7 +49,7 @@ function App() {
     dice.every(die => die.value === dice[0].value)
 
   const dieInstances = dice.map((die, index) => (
-    <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={hold} />
+    <Die id={die.id} key={die.id} value={die.value} isHeld={die.isHeld} holdFunction={holdDice} />
   ))
 
   function newGame() {

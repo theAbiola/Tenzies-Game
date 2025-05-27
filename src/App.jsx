@@ -1,20 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Die from './components/Die'
 import './App.css'
 import { nanoid } from "nanoid"
 import Confetti from 'react-confetti'
 
 function App() {
-  //Notice how we now have an arrow function that returns the call to the getDieNumbers() function.
+  //Notice how we now have an arrow function that returns the call to the getNewDice() function.
   //This is to help us prevent React from calling the getNumbers() function on every re-render of our App component
-  const [dice, setDice] = useState(() => getDieNumbers())
+  const [dice, setDice] = useState(() => getNewDice())
 
-  function getDieNumbers() {
+  function getNewDice() {
     let diceArray = []
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.ceil(Math.random() * 6)
       diceArray.push({
-        value: randomNumber,
+        value: 2,
         isHeld: false,
         id: nanoid()
       })
@@ -60,6 +60,18 @@ function App() {
     })))
   }
 
+  /* ANOTHER WAY TO WRITE THE newGame() FUNCTION. THUS WORKS BCUS THE CALL TO getNewDice() GIVES US NEW VALUES FOR THE DIE INSTANCE
+      function newGame() {
+    setDice(getNewDice())
+  }
+  */
+  const bigButtonRef = useRef(null)
+
+  useEffect(() => {
+    if (gameWon) {
+      bigButtonRef.current.focus()
+    }
+  }, [gameWon])
 
 
   return (
@@ -73,7 +85,7 @@ function App() {
             <div className='dice-container'>
               {dieInstances}
             </div>
-            <button className='big-button' onClick={gameWon ? newGame : rollDice}>{gameWon ? 'New Game' : 'Roll Dice'}</button>
+            <button ref={bigButtonRef} className='big-button' onClick={gameWon ? newGame : rollDice}>{gameWon ? 'New Game' : 'Roll Dice'}</button>
             {gameWon && <Confetti />}
           </div>
         </div>

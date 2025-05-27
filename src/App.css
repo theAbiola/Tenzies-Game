@@ -64,3 +64,12 @@ main {
   font-size: 1.1rem;
   font-family: Inter, sans-serif;
 }
+
+.big-button:focus {
+  outline: 2px solid #007bff;
+  /* blue outline */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* blue glow */
+  transform: scale(1.05);
+  /* slightly larger size */
+}

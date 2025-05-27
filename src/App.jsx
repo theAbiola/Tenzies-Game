@@ -14,7 +14,7 @@ function App() {
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.ceil(Math.random() * 6)
       diceArray.push({
-        value: 2,
+        value: randomNumber,
         isHeld: false,
         id: nanoid()
       })
